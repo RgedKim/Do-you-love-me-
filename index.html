@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senin İçin</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        h1 {
+            opacity: 0;
+            animation: fadeIn 3s forwards;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #444;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: #666;
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            opacity: 0.8;
+            animation: moveStars 5s infinite alternate ease-in-out;
+        }
+
+        @keyframes moveStars {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(10px); }
+        }
+    </style>
+</head>
+<body>
+    <audio autoplay loop>
+        <source src="Bôa - Duvet (Lyrics).mp3" type="audio/mpeg">
+    </audio>
+    
+    <div class="stars"></div>
+    <div class="container">
+        <h1 id="message">Ah, merhaba...</h1>
+        <div class="buttons" style="display: none;">
+            <button onclick="loveResponse(true)">Evet</button>
+            <button onclick="loveResponse(false)">Hayır</button>
+        </div>
+    </div>
+    
+    <script>
+        const message = document.getElementById("message");
+        const buttons = document.querySelector(".buttons");
+
+        setTimeout(() => {
+            message.innerHTML = "Bana aşık mısın?";
+            buttons.style.display = "block";
+        }, 3000);
+
+        function loveResponse(isLove) {
+            if (isLove) {
+                document.body.innerHTML = "<h1>Teşekkür ederim, ben de seni seviyorum! ❤️</h1>";
+            } else {
+                window.close();
+            }
+        }
+
+        function createStars() {
+            const starContainer = document.querySelector(".stars");
+            for (let i = 0; i < 100; i++) {
+                let star = document.createElement("div");
+                star.classList.add("star");
+                star.style.top = Math.random() * 100 + "vh";
+                star.style.left = Math.random() * 100 + "vw";
+                star.style.animationDuration = Math.random() * 5 + 3 + "s";
+                starContainer.appendChild(star);
+            }
+        }
+
+        createStars();
+    </script>
+</body>
+</html>
